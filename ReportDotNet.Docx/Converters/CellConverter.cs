@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using DocumentFormat.OpenXml.Packaging;
 using DocumentFormat.OpenXml.Wordprocessing;
 using ReportDotNet.Core;
@@ -36,6 +36,11 @@ namespace ReportDotNet.Docx.Converters
                 cellProperties.VerticalMerge = new VerticalMerge { Val = MergedCellValues.Restart };
             else if (parameters.MergeUp)
                 cellProperties.VerticalMerge = new VerticalMerge();
+
+            if (parameters.MergeRight)
+                cellProperties.HorizontalMerge = new HorizontalMerge { Val = MergedCellValues.Restart };
+            else if (parameters.MergeLeft)
+                cellProperties.HorizontalMerge = new HorizontalMerge();
 
             var borders = parameters.Borders ?? table.Parameters.Borders ?? Borders.None;
             if (borders != Borders.None)
